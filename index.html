@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CourseReg | Student Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>CourseReg</span>
+            </div>
+            <div class="nav-actions" style="display: flex; gap: 12px;">
+                <button id="my-courses-btn" class="nav-btn">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>My Courses</span>
+                    <span id="course-count" class="badge">0</span>
+                </button>
+                <button id="logout-btn" class="nav-btn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Shape Your Future</h1>
+            <p>Select from our world-class courses and build your dream career.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="courses-grid" id="courses-container">
+                <!-- Courses will be injected here by JS -->
+            </div>
+        </main>
+
+        <!-- My Courses Modal -->
+        <div id="my-courses-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>My Selected Courses</h2>
+                    <button id="close-modal-btn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="selected-courses-list" class="course-list">
+                        <!-- Selected items will be injected here -->
+                    </ul>
+                    <div id="empty-state" class="empty-state">
+                        <i class="fa-regular fa-folder-open"></i>
+                        <p>No courses selected yet.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary full-width" id="confirm-registration">Confirm Registration</button>
+                </div>
+            </div>
+        </div>
+        <div id="modal-overlay" class="overlay hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
