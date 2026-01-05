@@ -10,6 +10,9 @@ const Course = require('./models/Course');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+require('dotenv').config();
+
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
