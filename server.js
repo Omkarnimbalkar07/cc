@@ -8,15 +8,15 @@ const User = require('./models/User');
 const Course = require('./models/Course');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '.')));
 
-// MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/student-registration')
+// MongoDB Connection  ✅ FIXED
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.error(err));
 
@@ -47,7 +47,6 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         let user = await User.findOne({ studentId });
         if (!user) {
-            // Auto-register for demo purposes
             user = new User({ studentId, password });
             await user.save();
         } else if (user.password !== password) {
@@ -83,14 +82,13 @@ app.post('/api/user/:studentId/courses', async (req, res) => {
 
         const courseIndex = user.selectedCourses.indexOf(course._id);
         if (courseIndex > -1) {
-            user.selectedCourses.splice(courseIndex, 1); // Remove
+            user.selectedCourses.splice(courseIndex, 1);
         } else {
-            user.selectedCourses.push(course._id); // Add
+            user.selectedCourses.push(course._id);
         }
         
         await user.save();
         
-        // Return updated list
         const updatedUser = await User.findOne({ studentId: req.params.studentId }).populate('selectedCourses');
         res.json(updatedUser.selectedCourses);
     } catch (err) {
@@ -98,6 +96,7 @@ app.post('/api/user/:studentId/courses', async (req, res) => {
     }
 });
 
+// Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log("Server running on port " + PORT);
 });
